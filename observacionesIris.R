@@ -22,7 +22,7 @@ Eficiencia<- group_by(mtcars,cyl,am)#agrupo popr numero de cilindros  y automati
 #una vez agrupado podemos resumir y aplicar la formulacion sobre los los parametros
 #que deseemos y se mostraran agrupados en este caso por cyl y am
 
-Eficiencia<-summarise(Eficiencia,Eficiencia=mean(mpg),)
+Eficiencia<-summarise(Eficiencia,Eficiencia=mean(mpg))
 
 #MUTATE,permite crear variables nuevas , genera un df nuevo con todas y las nueva columna creada
 #en python usamos assign , df.assign(petalo_Sepalo=df.Petal.Length/df.Sepal.Length)
@@ -46,5 +46,11 @@ df<- iris %>%
 #pero se pasa a .funs una lista con los calculos que se realizaran
 Resumen<-iris %>% group_by(Species) %>% summarise_all(.funs=list(Media=mean,SD=sd))
 
+##empleando operadores y filtrando tablas
 
+DF<- iris %>% filter(Species!='versicolor') %>% group_by(Species) %>% summarise_all(mean)
+
+## usando un >
+
+DF<- iris %>% filter(Petal.Length>3) %>% group_by(Species) %>% summarise(Media=mean(Petal.Length),N=n())
 
